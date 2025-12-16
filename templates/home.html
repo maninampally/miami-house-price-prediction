@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Miami House Price Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .login {
+            width: 500px;
+            margin: 60px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 12px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #2e86de;
+            color: white;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #1b4f72;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login">
+        <h1>Welcome to the Miami House Price Prediction App</h1>
+
+        <!-- Input form -->
+        <form action="{{ url_for('predict_datapoint') }}" method="post">
+
+            <input type="number" step="0.000001"
+                   name="LATITUDE"
+                   placeholder="Latitude"
+                   required>
+
+            <input type="number" step="0.000001"
+                   name="LONGITUDE"
+                   placeholder="Longitude"
+                   required>
+
+            <input type="number"
+                   name="LND_SQFOOT"
+                   placeholder="Land Area (sqft)"
+                   required>
+
+            <input type="number"
+                   name="TOT_LVG_AREA"
+                   placeholder="Total Living Area (sqft)"
+                   required>
+
+            <input type="number"
+                   name="SPEC_FEAT_VAL"
+                   placeholder="Special Feature Value ($)"
+                   required>
+
+            <input type="number"
+                   name="RAIL_DIST"
+                   placeholder="Distance to Rail (ft)"
+                   required>
+
+            <input type="number"
+                   name="OCEAN_DIST"
+                   placeholder="Distance to Ocean (ft)"
+                   required>
+
+            <input type="number"
+                   name="WATER_DIST"
+                   placeholder="Distance to Water (ft)"
+                   required>
+
+            <input type="number"
+                   name="CNTR_DIST"
+                   placeholder="Distance to CBD (ft)"
+                   required>
+
+            <input type="number"
+                   name="SUBCNTR_DI"
+                   placeholder="Distance to Subcenter (ft)"
+                   required>
+
+            <input type="number"
+                   name="HWY_DIST"
+                   placeholder="Distance to Highway (ft)"
+                   required>
+
+            <input type="number"
+                   name="age"
+                   placeholder="Age of Property (years)"
+                   required>
+
+            <select name="avno60plus" required>
+                <option value="">Airplane Noise > 60</option>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+
+            <input type="number"
+                   name="structure_quality"
+                   placeholder="Structure Quality (1–5)"
+                   required>
+
+            <input type="number"
+                   name="month_sold"
+                   placeholder="Month Sold (1–12)"
+                   required>
+
+            <button type="submit">Predict House Price</button>
+
+        </form>
+
+        <!-- Prediction output -->
+        {% if prediction %}
+            <h2 style="text-align:center; margin-top:20px;">
+                Predicted Price: ${{ prediction }}
+            </h2>
+        {% endif %}
+    </div>
+</body>
+</html>
